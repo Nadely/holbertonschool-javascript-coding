@@ -20,7 +20,12 @@ request.get(`${url}`, (error, response, body) => {
   const filmData = JSON.parse(body).results;
   const characterId = '18';
 
-  const numberApparition = filmData.filter((film) => film.characters.includes(`https://swapi-api.hbtn.io/api/people/${characterId}/`));
+  let numberApparition = 0;
 
-  console.log(numberApparition.length);
+  for (const film of filmData) {
+    if (film.characters.includes(`https://swapi-api.hbtn.io/api/people/${characterId}/`)) {
+      numberApparition += 1;
+    }
+  }
+  console.log(numberApparition);
 });
