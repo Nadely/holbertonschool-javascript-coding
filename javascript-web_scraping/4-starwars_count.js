@@ -11,12 +11,11 @@ request(url, (error, response, body) => {
     console.error('Error:', error);
   } else {
     const filmData = JSON.parse(body).results;
-    const characterId = '18';
     let numberApparition = 0;
 
     for (const film of filmData) {
       for (const character of film.characters) {
-        if (character.includes(`https://swapi-api.hbtn.io/api/people/${characterId}/`)) {
+        if (character.includes(`/18/`)) {
           numberApparition += 1;
         }
       }
