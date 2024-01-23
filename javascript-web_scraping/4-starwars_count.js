@@ -23,8 +23,10 @@ request(url, (error, response, body) => {
   let numberApparition = 0;
 
   for (const film of filmData) {
-    if (film.characters.includes(`https://swapi-api.hbtn.io/api/people/${characterId}/`)) {
+    for (const character of film.characters) {
+      if (character.includes(`https://swapi-api.hbtn.io/api/people/${characterId}/`)) {
       numberApparition += 1;
+      }
     }
   }
   console.log(numberApparition);
