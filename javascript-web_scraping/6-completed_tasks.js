@@ -31,9 +31,5 @@ request.get(url, (error, response, body) => {
     }
   });
 
-  const result = {};
-  Object.entries(completedTasks).forEach(([userId, completedTasks]) => {
-    result[userId] = completedTasks;
-  });
-  console.log(result);
+  console.log(completedTasks);
 });
