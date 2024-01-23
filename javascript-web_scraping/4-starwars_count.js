@@ -15,7 +15,7 @@ request(url, (error, response, body) => {
 
     for (const film of filmData) {
       for (const character of film.characters) {
-        if (character.includes(`/18/`)) {
+        if (character.includes('/18/')) {
           numberApparition += 1;
         }
       }
