@@ -35,5 +35,9 @@ request.get(url, (error, response, body) => {
     result[userId] = completedTasks;
   });
 
-  console.log(result);
+  const formattedResult = Object.keys(result)
+  .map(key => `'${key}': ${result[key]}`)
+  .join(',\n');
+
+  console.log(`{ ${formattedResult} }`);
 });
