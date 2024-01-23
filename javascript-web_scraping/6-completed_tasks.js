@@ -30,5 +30,10 @@ request.get(url, (error, response, body) => {
     }
   });
 
-  console.log(completedTasks);
+  const result = {};
+  Object.entries(completedTasks).forEach(([userId, completedTasks]) => {
+    result[userId] = completedTasks;
+  });
+
+  console.log(result);
 });
