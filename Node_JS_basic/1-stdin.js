@@ -3,7 +3,7 @@ function welcome() {
   process.stdin.setEncoding('utf8');
 
   process.stdin.on('data', (input) => {
-    const name = input.trim();
+    const name = input.toString();
     process.stdout.write(`Your name is: ${name}`);
 
     process.stdout.write('This important software is now closing');
