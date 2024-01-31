@@ -11,7 +11,8 @@ function countStudentsAsync(path) {
       const lines = data.trim().split('\n').slice(1);
       const studentsByField = {};
 
-      lines.forEach(line => {
+      lines.forEach((line) => {
+        // eslint-disable-next-line no-unused-vars
         const [firstname, lastname, age, field] = line.split(',');
         if (field && field.trim() !== '') {
           if (!studentsByField[field]) {
@@ -25,7 +26,7 @@ function countStudentsAsync(path) {
       console.log(`Number of students: ${totalStudents}`);
 
       for (const field in studentsByField) {
-        if (studentsByField.hasOwnProperty(field)) {
+        if (Object.prototype.hasOwnProperty.call(studentsByField, field)) {
           const students = studentsByField[field];
           console.log(`Number of students in ${field}: ${students.length}. List: ${students.join(', ')}`);
         }
