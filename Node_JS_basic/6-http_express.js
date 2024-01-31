@@ -7,8 +7,9 @@ module.exports = app;
 
 if (require.main === module) {
   app.get('/', (request, response) => {
-  response.send('Hello Holberton School!');
-    });
+    response.send('Hello Holberton School!');
+  });
+
   app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
   });
