@@ -27,7 +27,7 @@ const app = http.createServer(async (req, res) => {
       });
 
       let responseText = 'This is the list of our students\n';
-      let totalStudents = lines.length;
+      const totalStudents = lines.length;
 
       responseText += `Number of students: ${totalStudents}\n`;
 
