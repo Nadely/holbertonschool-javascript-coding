@@ -4,13 +4,17 @@ function welcome() {
 
   process.stdin.on('data', (input) => {
     const name = input.trim();
-    console.log(`Your name is: ${name}`);
-
-    console.log('This important software is now closing');
-    process.exit();
+    if (name.toLowerCase() === 'exit' || name.toLowerCase() === 'quit') {
+      console.log('This important software is now closing');
+      process.exit();
+    } else {
+      console.log(`Your name is: ${name}`);
+    }
   });
 }
 
 module.exports = welcome;
 
-welcome();
+if (require.main === module) {
+  welcome();
+}
