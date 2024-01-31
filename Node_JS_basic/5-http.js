@@ -15,7 +15,7 @@ const app = http.createServer((req, res) => {
             res.end('Cannot load the database');
             return;
           }
-          const lines = data.trim().split('\n').filter(line => line.trim() !== '').slice(1);
+          const lines = data.trim().split('\n').filter((line) => line.trim() !== '').slice(1);
           const studentsByField = {};
 
           lines.forEach((line) => {
@@ -57,8 +57,11 @@ const app = http.createServer((req, res) => {
   }
 });
 
+const port = 1245;
 module.exports = app;
 
 if (require.main === module) {
-    app.listen(1245);
+    app.listen(port, () => {
+      console.log(`Server is running on http://localhost: ${port}`)
+    });
   }

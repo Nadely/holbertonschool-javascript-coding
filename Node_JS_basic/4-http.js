@@ -5,8 +5,11 @@ const app = http.createServer((req, res) => {
   res.end('Hello Holberton School !\n');
 });
 
+const port = 1245;
 module.exports = app;
 
 if (require.main === module) {
-    app.listen(1245);
+    app.listen(port, () => {
+      console.log(`Server is running on http://localhost: ${port}`)
+    });
   }
