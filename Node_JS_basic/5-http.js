@@ -4,10 +4,12 @@ const countStudentsAsync = require('./3-read_file_async');
 
 const app = http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
+
   if (req.url === '/') {
     res.end('Hello Holberton School!');
   } else if (req.url === '/students') {
     const database = 'database.csv';
+
     countStudentsAsync(database)
       .then(() => {
         fs.readFile(database, 'utf8', (err, data) => {
@@ -15,11 +17,11 @@ const app = http.createServer((req, res) => {
             res.end('Cannot load the database');
             return;
           }
-          const lines = data.trim().split('\n').filter((line) => line.trim() !== '').slice(1);
+
+          const lines = data.trim().split('\n').slice(1);
           const studentsByField = {};
 
           lines.forEach((line) => {
-            // eslint-disable-next-line no-unused-vars
             const [firstname, lastname, age, field] = line.split(',');
             if (field && field.trim() !== '') {
               if (!studentsByField[field]) {
@@ -30,14 +32,7 @@ const app = http.createServer((req, res) => {
           });
 
           let responseText = 'This is the list of our students\n';
-          let totalStudents = 0;
-
-          for (const field in studentsByField) {
-            if (Object.prototype.hasOwnProperty.call(studentsByField, field)) {
-              const students = studentsByField[field];
-              totalStudents += students.length;
-            }
-          }
+          let totalStudents = lines.length;
 
           responseText += `Number of students: ${totalStudents}\n`;
 
@@ -47,11 +42,11 @@ const app = http.createServer((req, res) => {
               responseText += `Number of students in ${field}: ${students.length}. List: ${students.join(', ')}\n`;
             }
           }
+
           res.end(responseText);
         });
       })
-      .catch((error) => {
-        console.error(error.message);
+      .catch(() => {
         res.end('Cannot load the database');
       });
   }
@@ -61,7 +56,7 @@ const port = 1245;
 module.exports = app;
 
 if (require.main === module) {
-    app.listen(port, () => {
-      console.log(`Server is running on http://localhost:${port}`)
-    });
-  }
+  app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+  });
+}
