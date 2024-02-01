@@ -3,7 +3,7 @@ const countStudentsAsync = require('./3-read_file_async');
 
 const app = express();
 
-const database = 'database.csv';
+const database = process.argv[2];
 
 app.get('/', (req, res) => {
   res.type('text/plain').send('Hello Holberton School!');
