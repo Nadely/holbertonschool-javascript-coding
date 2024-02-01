@@ -9,30 +9,42 @@ function countStudentsAsync(path) {
       }
 
       const lines = data.trim().split('\n').slice(1);
-      const studentsByField = {};
+      let nbOfLine = 0;
+      let csStudent = 0;
+      let sweStudent = 0;
+      let csString = "";
+      let sweString = "";
 
-      lines.forEach((line) => {
-        // eslint-disable-next-line no-unused-vars
-        const [firstname, lastname, age, field] = line.split(',');
-        if (field && field.trim() !== '') {
-          if (!studentsByField[field]) {
-            studentsByField[field] = [];
+      for (const line of lines) {
+        if (line !== '') {
+          nbOfLine += 1;
+          const cutLine = line.split(',');
+          if (cutLine[3] === 'CS') {
+            csStudent += 1;
+            if (csString !== "") {
+              csString += ', ';
+              }
+              csString += cutLine[0];
           }
-          studentsByField[field].push(firstname);
-        }
-      });
-
-      const totalStudents = lines.length;
-      console.log(`Number of students: ${totalStudents}`);
-
-      for (const field in studentsByField) {
-        if (Object.prototype.hasOwnProperty.call(studentsByField, field)) {
-          const students = studentsByField[field];
-          console.log(`Number of students in ${field}: ${students.length}. List: ${students.join(', ')}`);
+          else if (cutLine[3] === 'SWE') {
+            sweStudent += 1;
+            if (sweString !== "") {
+              sweString += ', ';
+              }
+              sweString += cutLine[0];
+          }
         }
       }
 
-      resolve();
+      const result = {
+        sentence1: `Number of students: ${nbOfLine}`,
+        sentence2: `Number of students in CS: ${csStudent}. List: ${csString}`,
+        sentence3: `Number of students in SWE: ${sweStudent}. List: ${sweString}`,
+      }
+      console.log(result.sentence1);
+      console.log(result.sentence2);
+      console.log(result.sentence3);
+      resolve(result);
     });
   });
 }
