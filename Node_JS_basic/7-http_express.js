@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
   res.type('text/plain').send('Hello Holberton School!');
 });
 
-app.get('/students', async (req, res) => {
+app.get('/students', (req, res) => {
   const mess1 = 'This is the list of our students';
   countStudentsAsync(database)
     .then((result) => {
