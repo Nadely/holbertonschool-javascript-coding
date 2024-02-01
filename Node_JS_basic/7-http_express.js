@@ -6,20 +6,23 @@ const app = express();
 const database = 'database.csv';
 
 app.get('/', (req, res) => {
-  res.send('Hello Holberton School!');
+  res.type('text/plain').send('Hello Holberton School!');
 });
 
 app.get('/students', async (req, res) => {
-  res.write('This is the list of our students\n');
+  const mess1 = 'This is the list of our students';
   countStudentsAsync(database)
     .then((result) => {
-      res.write(`${result.sentence1}\n`);
-      res.write(`${result.sentence2}\n`);
-      res.write(`${result.sentence3}`);
-      res.end();
+
+      const mess2 = result.sentence1;
+      const mess3 = result.sentence1;
+      const mess4 = result.sentence1;
+      const message = `${mess1}\n${mess2}\n${mess3}\n${mess4}`
+      res.type('text/plain').send(message)
     })
     .catch((error) => {
-      res.end(error.message);
+      const err = `${mess1}\n${error.message}`;
+      res.type('text/plain').send(err);
     });
 });
 
