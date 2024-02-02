@@ -25,8 +25,6 @@ app.get('/students', (req, res) => {
     });
 });
 
-app.listen(1245, () => {
-  console.log('Server is running on http://localhost:1245');
-});
+app.listen(1245);
 
 module.exports = app;
