@@ -2,8 +2,8 @@ import readDatabase from '../utils';
 
 class StudentsController {
   static async getAllStudents(req, res) {
-    try {
-      const studentsData = await readDatabase(process.argv[2] || './database.csv');
+    readDatabase(process.argv[2] || './database.csv')
+    .then((studentsData) => {
       const csList = studentsData.CS.join(', ');
       const sweList = studentsData.SWE.join(', ');
 
@@ -12,10 +12,11 @@ class StudentsController {
         + `Number of students in SWE: ${studentsData.SWE.length}. List: ${sweList}`;
 
       res.status(200).send(resText);
-    } catch (error) {
+    })
+    .catch ((error) => {
       console.error('Error processing students data:', error);
       res.status(500).send('Cannot load the database');
-    }
+    });
   }
 
   static async getAllStudentsByMajor(request, res) {
