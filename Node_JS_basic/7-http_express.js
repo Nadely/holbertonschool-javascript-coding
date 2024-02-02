@@ -14,8 +14,8 @@ app.get('/students', (req, res) => {
   countStudentsAsync(database)
     .then((result) => {
       const mess2 = result.sentence1;
-      const mess3 = result.sentence1;
-      const mess4 = result.sentence1;
+      const mess3 = result.sentence2;
+      const mess4 = result.sentence3;
       const message = `${mess1}\n${mess2}\n${mess3}\n${mess4}`;
       res.type('text/plain').send(message);
     })
